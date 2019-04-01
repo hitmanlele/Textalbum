@@ -1,7 +1,7 @@
 package com.bbg.textalbum;
 
 /**
- * Created by administrator on 2017/10/19.
+ * Created by administrator on 2019/03/26.
  */
 
 public class Photo {

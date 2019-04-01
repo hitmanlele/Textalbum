@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by administrator on 2017/10/19.
+ * Created by administrator on 2019/03/25.
  */
 
 public class RVAdapter extends SectionedRecyclerViewAdapter<RVAdapter.MyHeadView,RVAdapter.MyViewHolder,RVAdapter.MyFootView>{
@@ -71,10 +71,10 @@ public class RVAdapter extends SectionedRecyclerViewAdapter<RVAdapter.MyHeadView
 //        System.out.println(path);
 //            Ttest();
        Glide.with(context).load(new File(path[section][position])).centerCrop().diskCacheStrategy(DiskCacheStrategy.NONE).into(viewHolder.img);
-        viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+        viewHolder.cardView.setOnClickListener(new View.OnClickListener() {//cardview点击事件
             @Override
             public void onClick(View v) {
-                onItemClickListener.onItemClick(v,viewHolder.getAdapterPosition()-section-1);
+                onItemClickListener.onItemClick(v,viewHolder.getAdapterPosition()-section+1);//设置了点击图片的position，有这个Mainactivity中的itemclick才有用，不然点击无效
             }
         });
     }
@@ -82,7 +82,7 @@ public class RVAdapter extends SectionedRecyclerViewAdapter<RVAdapter.MyHeadView
     public void setOnItemClickListener(OnItemClickListener itemClick){
         this.onItemClickListener=itemClick;
     }
-    public void setOnItemLongClickListener(OnItemLongClickListener itemLongClick){
+    public void setOnItemLongClickListener(OnItemLongClickListener itemLongClick){//长按点击
         this.onItemLongClickListener=itemLongClick;
     }
     public interface OnItemClickListener{

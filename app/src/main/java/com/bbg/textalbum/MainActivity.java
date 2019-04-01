@@ -16,7 +16,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
-
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersDecoration;
 import com.truizlop.sectionedrecyclerview.SectionedSpanSizeLookup;
 
@@ -56,21 +55,21 @@ public class MainActivity extends AppCompatActivity {
             super.handleMessage(msg);
             switch (msg.what) {
                 case 1:
-                    Bundle bundle = msg.getData();
+                    Bundle bundle = msg.getData(); //对应setData ,接收由msg传送过来的bundle数据
                     photos = (ArrayList<Photo>) bundle.getParcelableArrayList("photos").get(0);
                     photoDates = (ArrayList<String>) bundle.getParcelableArrayList("photos").get(1);
 
                      adapter = new RVAdapter(photos, photoDates, MainActivity.this);
 
-                    GridLayoutManager manager = new GridLayoutManager(MainActivity.this, 3);
-                    SectionedSpanSizeLookup lookup = new SectionedSpanSizeLookup(adapter, manager);
+                    GridLayoutManager manager = new GridLayoutManager(MainActivity.this, 3);//数字表示显示几列
+                    SectionedSpanSizeLookup lookup = new SectionedSpanSizeLookup(adapter, manager);//是GridLayoutManager中的方法，关联adapter中的onBindSectionHeaderViewHolder方法
                     manager.setSpanSizeLookup(lookup);
                     RV.setLayoutManager(manager);
-                    RV.setAdapter(adapter);
+                    RV.setAdapter(adapter);//绑定recycleview和适配器
                     adapter.setOnItemClickListener(new RVAdapter.OnItemClickListener() {
                         @Override
                         public void onItemClick(View view, int position) {
-                            Toast.makeText(MainActivity.this,position+": "+photos.get(position).getPath(),Toast.LENGTH_LONG).show();
+                            Toast.makeText(MainActivity.this,3+":"+photos.get(position).getPath(),Toast.LENGTH_SHORT).show();
                         }
                     });
             }

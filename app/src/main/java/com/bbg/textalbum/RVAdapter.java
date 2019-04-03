@@ -74,7 +74,10 @@ public class RVAdapter extends SectionedRecyclerViewAdapter<RVAdapter.MyHeadView
         viewHolder.cardView.setOnClickListener(new View.OnClickListener() {//cardview点击事件
             @Override
             public void onClick(View v) {
-                onItemClickListener.onItemClick(v,viewHolder.getAdapterPosition()-section+1);//设置了点击图片的position，有这个Mainactivity中的itemclick才有用，不然点击无效
+                onItemClickListener.onItemClick(v,viewHolder.getAdapterPosition()-section+1);//设置了点击图片的position，有这个Mainactivity中的itemclick才有用，不然点击无效,
+
+                //getAdapterPosition返回数据在Adapter中的位置（也许位置的变化还未来得及刷新到布局中），当使用Adapter的时候（例如调用Adapter的notify相关方法时）考虑使用
+
             }
         });
     }

@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        requestPower();
+
         findView();
         getPhotos();
     }
@@ -75,14 +75,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
-    public void requestPower() {
-        //判断是否已经赋予权限
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            //申请权限，字符串数组内是一个或多个要申请的权限，1是申请权限结果的返回参数，在onRequestPermissionsResult可以得知申请结果
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,}, 1);
-        }
-    }
+
     public void getPhotos() {
         new Thread() {
             @Override
@@ -90,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 List<Photo> list = new ArrayList<Photo>();
                 List<String> list1 = new ArrayList<String>();
                 super.run();
-                Cursor cursor = resolver.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, null, null, null, MediaStore.Images.Media.DATE_TAKEN );
+                Cursor cursor = resolver.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, null, null, null, MediaStore.Images.Media.DATE_TAKEN+" DESC" );
                 if (cursor != null && cursor.moveToFirst()) {
                     do {
                         String path = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA));
